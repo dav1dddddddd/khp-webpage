@@ -1,10 +1,9 @@
 @font-face {
     font-family: HandwritingFont;
-    src: url(HandwritingRegular-owLLA.otf);
+    src: url(Dhlhandwritingfont-Regular.ttf);
 }
 
 * {
-    margin: 0;
     padding: 0;
     font-family: HandwritingFont;
     box-sizing: border-box;
@@ -12,7 +11,7 @@
 
 body {
     color: rgb(156, 149, 255);
-    background-color: #D5F6D7;
+    background-color: #d1ffd4;
     overflow: hidden;
 }
 
@@ -24,23 +23,23 @@ nav {
 }
 
 nav ul {
-    position: absolute;
-    top: 1.5rem;
-    right: 33%;
+    margin: auto;
 }
 
 nav ul li {
+    position: relative;
     list-style: none;
-    margin: 0 3rem;
+    margin: 2rem;
+    margin-top: 2rem;
     display: inline-block;
 }
 
 nav ul li a {
     color: rgb(188, 183, 255);
-    font-size: 4rem;
+    font-size: 3rem;
     text-decoration: none;
     font-weight: 550;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 }
 
 nav ul li a:hover {
@@ -55,78 +54,248 @@ html {
     position: absolute;
     top: 16.8%;
     right: 6.5%;
-    width: 17.5%;
+    width: 15%;
     max-height: 30rem;
     border-radius: 1.625rem;
     transform: rotate(-5.5deg);
     z-index: 1;
 }
 
-#flowers {
+#bsd {
     position: absolute;
-    top: 67.5%;
+    top: 40%;
     left: 5%;
     width: 15%;
-    transform: rotate(-20deg);
+}
+
+#bsd:hover {
+    cursor: not-allowed;
+}
+
+#bsd:active {
+    cursor: help;
 }
 
 #stars {
     position: absolute;
-    top: 2.5%;
-    left: 29%;
+    top: 4%;
+    left: 24.5rem;
     width: 5%;
     transform: rotate(10deg);
 }
 
 #stars2 {
     position: absolute;
-    top: 2.5%;
-    right: 29%;
+    top: 4%;
+    right: 24.5rem;
     width: 5%;
     transform: rotate(10deg);
 }
 
 #boba {
     position: absolute;
-    left: 70%;
-    top: 38.5%;
-    width: 27.5%;
+    right: 2rem;
+    top: 16.5rem;
+    width: 25%;
     z-index: 3;
 }
 
 #frame {
     position: absolute;
     top: 7%;
-    left: 72%;
-    width: 25%;
+    left: 74.5%;
+    width: 22.5%;
     transform: rotate(-5deg);
     z-index: 2;
 }
 
-#cat {
+#frame:hover {
+    cursor: grab;
+}
+
+#frame:active {
+    cursor: grabbing;
+}
+
+#axolotl {
     position: absolute;
-    top: 35%;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    top: 67.5%;
     width: 17.5%;
     left: 1%;
 }
 
+#axolotl:hover {
+    cursor: grab;
+}
+
+#axolotl:active {
+    cursor: grabbing;
+}
+
 #wooper {
     position: absolute;
+    width: 15%;
     top: 5%;
     left: 6%;
 }
 
-
 .container {
     position: absolute;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     top: 16%;
     right: 6%;
     background-color: rgba(70, 56, 82, 0.8);
     border-radius: 1.625rem;
-    width: 18.5%;
-    height: 35.5%;
+    width: 16%;
+    height: 37%;
+    max-height: 14.5rem;
     transform: rotate(-5.5deg)
+}
+.start-container {
+    position: absolute;
+    display: block;
+    text-align: center;
+    top: 10%;
+    left: 26.75%;
+    background: #e2ffe5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 700px;
+    max-height: 500px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+#cat {
+    position: absolute;
+    width: 20%;
+    left: 39.5%;
+    bottom: 15.25%;
+}
+
+#cat:hover {
+    cursor: grab;
+}
+
+#cat:active {
+    cursor: grabbing;
+}
+
+#tape {
+    position: absolute;
+    width: 20%;
+    bottom: 88.5%;
+    right: 88.5%;
+    transform: rotate(135deg);
+}
+
+#tape2 {
+    position: absolute;
+    width: 35%;
+    left: 80%;
+    bottom: 72.5%;
+    transform: rotate(45deg);
+}
+
+.start-container h1 {
+    font-size: 3.1rem;
+    margin-bottom: 1rem;
+}   
+
+.start-container h2 {
+    font-size: 1.75rem; 
+}
+
+.start-container p {
+    font-size: 1.5rem;
+    margin-top: 5.5rem;
+    margin-bottom: 5.5rem;
+}
+
+#start-button {
+    background: #000000;
+    display: block;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.25rem;
+    width: 250px;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#start-button:hover {
+    color: #000;
+    background: #fff;
+}
+
+.quiz-container {
+    position: absolute;
+    display: none;
+    bottom: 10%;
+    left: 30.75%;
+    background: #f6e3ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 525px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.quiz-container h1 {
+    font-size: 30px;
+    color: #000000;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.quiz {
+    padding: 10px 0;
+}
+
+.quiz h2 {
+    font-size: 25px;
+    color: #000000;
+    font-weight: 600;
+}
+
+.button {
+    background: #e0a7ff;
+    color: #222;
+    font-weight: 500;
+    font-size: 20px;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background: #ca66ff;
+    color: #000000;
+}
+
+#next-button {
+    background: #000000;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 200px;
+    border: 0;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
 }
