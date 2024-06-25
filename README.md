@@ -9,5 +9,6 @@ I know she'll cherish the effort I put into making this for her.&nbsp;
 - Timeline section&nbsp;
 - Styling for mobile users&nbsp;
 # Recently finished ✔️
-- Basic home page structure&nbsp;
+- Redesigned home page structure&nbsp;
+- Start section&nbsp;
 - CSS styling&nbsp;
