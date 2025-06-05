@@ -1,1 +1,292 @@
+@font-face {
+    font-family: HandwritingFont;
+    src: url(Dhlhandwritingfont-Regular.ttf);
+}
 
+@keyframes moving
+{
+    from
+    {
+        transform: translateX(5rem);
+        opacity: 0;
+    }
+    to
+    {
+        transform: translateX(0rem);
+        opacity: 1;
+    }
+}
+
+@keyframes movingvert
+{
+    from
+    {
+        transform: translateY(4.5rem);
+        opacity: 0;
+    }
+    to
+    {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+}
+
+@keyframes navbar
+{
+    from
+    {
+        transform: translateY(4.5rem);
+        opacity: 0;
+    }
+    to
+    {
+        transform: translateY(0rem);
+        opacity: 0.5;
+    }
+}
+
+* {
+    padding: 0;
+    font-family: HandwritingFont;
+    box-sizing: border-box;
+}
+
+body {
+    color: rgb(156, 149, 255);
+    background-color: #d1ffd4;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    animation: movingvert 0.5s ease;
+}
+
+nav ul {
+    margin: auto;
+}
+
+nav ul li {
+    position: relative;
+    list-style: none;
+    margin: 2rem;
+    margin-top: 2.25rem;
+    display: inline-block;
+    z-index: 3;
+    
+}
+
+nav ul li a {
+    color: rgb(139, 131, 255);
+    font-size: 3rem;
+    text-decoration: none;
+    font-weight: 550;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: rgb(188, 184, 255);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#rotate270 {
+    transform: rotate(270deg);
+}
+
+#flowers {
+    display: none;
+    position: absolute;
+    width: 10%;
+    top: 10%;
+    left: 5%;
+}
+
+#stars {
+    position: absolute;
+    top: 4%;
+    left: 24.5rem;
+    width: 5%;
+    transform: rotate(10deg);
+    animation: movingvert 0.5s ease;
+    z-index: 3;
+}
+
+#stars2 {
+    position: absolute;
+    top: 4%;
+    right: 24.5rem;
+    width: 5%;
+    transform: rotate(10deg);
+    animation: movingvert 0.5s ease;
+    z-index: 3;
+}
+
+.background-container {
+    position: absolute;
+    top: 20rem;
+    right: 0rem;
+    height: 100%;
+    width: 100%;
+    background-color: #d1ffd4;
+    z-index: 0;
+}
+
+.bar-container {
+    position: absolute;
+    background-color: white;
+    width: 50rem;
+    height: 6rem;
+    top: 1rem;
+    left: 22.5rem;
+    opacity: 50%;   
+    border-radius: 50px;
+    animation: navbar 0.5s ease;
+    z-index: 0;
+}
+
+#cat {
+    position: absolute;
+    width: 20%;
+    left: 39.5%;
+    bottom: 16.75%;
+}
+
+#cat:hover {
+    cursor: grab;
+}
+
+#cat:active {
+    cursor: grabbing;
+}
+
+#tape {
+    position: absolute;
+    width: 20%;
+    bottom: 88.5%;
+    right: 88.5%;
+    transform: rotate(135deg);
+}
+
+#tape2 {
+    position: absolute;
+    width: 35%;
+    left: 80%;
+    bottom: 72.5%;
+    transform: rotate(45deg);
+}
+
+#start-container {
+    position: absolute;
+    display: block;
+    text-align: center;
+    top: 15%;
+    left: 26.75%;
+    background: #f6e3ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 700px;
+    max-height: 500px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+    animation: moving 0.5s ease;
+}
+
+#start-container h1 {
+    font-size: 3.1rem;
+    margin-bottom: 1rem;
+}   
+
+#start-container h2 {
+    font-size: 1.75rem; 
+}
+
+#start-container p {
+    font-size: 1.5rem;
+    margin-top: 5.5rem;
+    margin-bottom: 5.5rem;
+}
+
+#start-container a {
+    display: block;
+    width: 250px;
+    max-width: 10px;
+    text-decoration: none;
+}
+
+#start-button {
+    background: #000000;
+    position: relative;
+    left: 12rem;
+    display: block;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.25rem;
+    width: 250px;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#start-button:hover {
+    color: #000;
+    background: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 40px 10px 0 10px;
+    z-index: 1;
+}
+
+.container .heading {
+    width: 50%;
+}
+
+.container .description h1 {
+    position: relative;
+    bottom: 2rem;
+    font-size: 2em;
+    animation: moving 0.5s ease;
+}
+
+.container .description h2 {
+    position: relative;
+    bottom: 2rem;
+    font-size: 1.75em;
+    animation: moving 0.5s ease;
+}
+
+.container .box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container .header {
+    color: #ffffff;
+}
+
+.container .box .dream {
+    position: relative;
+    bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 32.5%;
+}
+
+.container .box .dream img {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
