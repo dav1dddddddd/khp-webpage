@@ -20,6 +20,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    animation: movingvert 0.5s ease;
 }
 
 nav ul {
@@ -30,12 +31,14 @@ nav ul li {
     position: relative;
     list-style: none;
     margin: 2rem;
-    margin-top: 2rem;
+    margin-top: 2.25rem;
     display: inline-block;
+    z-index: 3;
+    
 }
 
 nav ul li a {
-    color: rgb(188, 183, 255);
+    color: rgb(139, 131, 255);
     font-size: 3rem;
     text-decoration: none;
     font-weight: 550;
@@ -43,7 +46,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: rgb(139, 131, 255);
+    color: rgb(188, 184, 255);
 }
 
 html {
@@ -53,7 +56,7 @@ html {
 #enoki {
     position: absolute;
     top: 16.8%;
-    right: 6.5%;
+    right: 4rem;
     width: 15%;
     max-height: 30rem;
     border-radius: 1.625rem;
@@ -82,6 +85,8 @@ html {
     left: 24.5rem;
     width: 5%;
     transform: rotate(10deg);
+    animation: movingvert 0.5s ease;
+    z-index: 3;
 }
 
 #stars2 {
@@ -90,11 +95,13 @@ html {
     right: 24.5rem;
     width: 5%;
     transform: rotate(10deg);
+    animation: movingvert 0.5s ease;
+    z-index: 3;
 }
 
 #boba {
     position: absolute;
-    right: 2rem;
+    right: 0rem;
     top: 16.5rem;
     width: 25%;
     z-index: 3;
@@ -103,7 +110,7 @@ html {
 #frame {
     position: absolute;
     top: 7%;
-    left: 74.5%;
+    right: 0.75rem;
     width: 22.5%;
     transform: rotate(-5deg);
     z-index: 2;
@@ -144,7 +151,7 @@ html {
 .container {
     position: absolute;
     top: 16%;
-    right: 6%;
+    right: 3.5rem;
     background-color: rgba(70, 56, 82, 0.8);
     border-radius: 1.625rem;
     width: 16%;
@@ -152,13 +159,27 @@ html {
     max-height: 14.5rem;
     transform: rotate(-5.5deg)
 }
-.start-container {
+
+.bar-container {
+    position: absolute;
+    background-color: white;
+    width: 50rem;
+    height: 6rem;
+    top: 1rem;
+    left: 22.5rem;
+    opacity: 50%;   
+    border-radius: 50px;
+    animation: navbar 0.5s ease;
+    z-index: 0;
+}
+
+#start-container {
     position: absolute;
     display: block;
     text-align: center;
-    top: 10%;
+    top: 15%;
     left: 26.75%;
-    background: #e2ffe5;
+    background: #f6e3ff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     width: 90%;
     max-width: 700px;
@@ -166,13 +187,56 @@ html {
     margin: 100px auto 0;
     border-radius: 10px;
     padding: 30px;
+    animation: moving 0.5s ease;
+}
+
+@keyframes moving
+{
+    from
+    {
+        transform: translateX(5rem);
+        opacity: 0;
+    }
+    to
+    {
+        transform: translateX(0rem);
+        opacity: 1;
+    }
+}
+
+@keyframes movingvert
+{
+    from
+    {
+        transform: translateY(4.5rem);
+        opacity: 0;
+    }
+    to
+    {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+}
+
+@keyframes navbar
+{
+    from
+    {
+        transform: translateY(4.5rem);
+        opacity: 0;
+    }
+    to
+    {
+        transform: translateY(0rem);
+        opacity: 0.5;
+    }
 }
 
 #cat {
     position: absolute;
     width: 20%;
     left: 39.5%;
-    bottom: 15.25%;
+    bottom: 16.75%;
 }
 
 #cat:hover {
@@ -199,16 +263,20 @@ html {
     transform: rotate(45deg);
 }
 
-.start-container h1 {
+#start-container {
+    display: block;
+}
+
+#start-container h1 {
     font-size: 3.1rem;
     margin-bottom: 1rem;
 }   
 
-.start-container h2 {
+#start-container h2 {
     font-size: 1.75rem; 
 }
 
-.start-container p {
+#start-container p {
     font-size: 1.5rem;
     margin-top: 5.5rem;
     margin-bottom: 5.5rem;
@@ -233,44 +301,45 @@ html {
     background: #fff;
 }
 
-.quiz-container {
+#quiz-container {
     position: absolute;
     display: none;
-    bottom: 10%;
-    left: 30.75%;
+    bottom: 12.5%;
+    left: 25.75%;
     background: #f6e3ff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     width: 90%;
-    max-width: 600px;
-    max-height: 525px;
+    max-width: 700px;
+    max-height: 475px;
     margin: 100px auto 0;
     border-radius: 10px;
     padding: 30px;
+    animation: moving 0.5s ease;
 }
 
-.quiz-container h1 {
-    font-size: 30px;
-    color: #000000;
-    font-weight: 600;
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
+.bar {
+    position: absolute;
 }
 
 .quiz {
-    padding: 10px 0;
+    padding: 10px 0px;
 }
 
 .quiz h2 {
-    font-size: 25px;
+    font-size: 35px;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 20px;
     color: #000000;
     font-weight: 600;
+    animation: moving 0.5s ease;
 }
 
 .button {
     background: #e0a7ff;
     color: #222;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 25px;
     width: 100%;
     border: 1px solid #222;
     padding: 10px;
@@ -279,11 +348,16 @@ html {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
+    animation: moving 0.5s ease;
 }
 
-.button:hover {
+.button:hover:not([disabled]) {
     background: #ca66ff;
     color: #000000;
+}
+
+.button:disabled {
+    cursor: no-drop;
 }
 
 #next-button {
@@ -292,10 +366,22 @@ html {
     font-size: 1.5rem;
     font-weight: 500;
     width: 200px;
-    border: 0;
     padding: 10px;
     margin: 20px auto 0;
     border-radius: 4px;
     cursor: pointer;
-    display: block;
+    transition: all 0.3s ease;
+    animation: moving 0.5s ease;
+}
+#next-button:hover {
+    background: #fff;
+    color: #000000;
+}
+
+.correct {
+    background: #9aeabc;
+}
+
+.incorrect {
+    background: #ff9393;
 }
