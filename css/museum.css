@@ -1,0 +1,158 @@
+@font-face {
+    font-family: HandwritingFont;
+    src: url(Dhlhandwritingfont-Regular.ttf);
+}
+
+
+* {
+    padding: 0;
+    font-family: HandwritingFont;
+    box-sizing: border-box;
+}
+
+body {
+      margin: 0;
+      height: 100vh;
+      background: #d1ffd4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    .background-container {
+        position: absolute;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-position: right center;
+        background-image: url(../assets/images/spotlight.jpg);
+        z-index: 0;
+    }
+
+    /* 8-bit font (optional) */
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    .carousel-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 120px;
+    }
+
+    .date-panel {
+  width: 170px;          /* narrow box width */
+  height: 80px;         /* same height as one carousel item */
+  border: 4px solid #fff;
+  background-color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  font-family: 'Press Start 2P', monospace;
+  color: #eee;
+  font-size: 1rem;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.date-item {
+  width: 100%;
+  height: 100%;
+  background: #111;
+  overflow: hidden;
+  position: relative;  /* <-- added */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.date-item p {
+  margin: 0;
+  position: absolute;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  will-change: transform, opacity;
+  color: #fff;
+  font-family: 'HandwritingFont', monospace;
+  font-size: 30px;
+  text-align: center;
+  user-select: none;
+  white-space: nowrap;
+}
+
+
+    .carousel-container {
+      width: 500px;
+      height: 520px;
+      right: 67px;
+      position: relative;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    #frame {
+        position: absolute;
+        left: 495px;
+        max-width: 540px;
+        z-index: 3;
+    }
+
+    .carousel-track {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      min-height: 0px;
+      background: #333;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+      text-transform: uppercase;
+      border-bottom: 4px solid #000;
+    }
+
+    .carousel-item img {
+        max-width: 70%;
+        max-height: 100%;
+        position: relative;
+        top: 30px;
+        object-fit: contain;
+        display: block;
+}
+
+.carousel-buttons {
+      display: flex;
+      position: relative;
+      right: 130px;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 1;
+    }
+
+    .btn {
+      background: #000;
+      border: 4px solid #fff;
+      color: #fff;
+      padding: 8px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 30px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.1s ease;
+    }
+
+    .btn:hover {
+      background: #111;
+      transform: scale(1.05);
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
