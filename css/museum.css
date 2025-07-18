@@ -87,7 +87,7 @@ body {
     .carousel-container {
       width: 500px;
       height: 520px;
-      right: 67px;
+      right: 127px;
       position: relative;
       overflow: hidden;
       background-color: #000;
@@ -98,6 +98,18 @@ body {
         left: 495px;
         max-width: 540px;
         z-index: 3;
+    }
+
+    #sign {
+      position: absolute;
+      width: 160px;
+      top: 10px;
+      left: 50px;
+      transition: transform 0.3s ease;
+    }
+
+    #sign:hover {
+      transform: scale(1.15);
     }
 
     .carousel-track {
