@@ -147,7 +147,8 @@ const dates = [
   "JUL 30, 2025",
   "JUL 30, 2025",
   "JUL 30, 2025",
-  "JUL 30, 2025"
+  "JUL 30, 2025",
+  "JUL 30, 2025" // Added missing date to match the 67th image
 ];
 
 let currentIndex = 0;
@@ -202,6 +203,12 @@ function animateDateChange(newDate) {
 }
 
 function scrollToIndex(index) {
+  // Ensure we don't go beyond the available dates
+  if (index >= dates.length) {
+    console.warn(`No date available for index ${index}`);
+    return;
+  }
+  
   const offset = getItemHeight() * index;
   track.style.transform = `translateY(-${offset}px)`;
 
