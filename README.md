@@ -10,5 +10,5 @@ I know she'll cherish the effort I put into making this for her.&nbsp;
 - Redesigned home page structure&nbsp;
 - Start section&nbsp;
 - Quiz section&nbsp;
-- Gallery section&nbsp;
+- Museum section&nbsp;
 - CSS styling&nbsp;
