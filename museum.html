@@ -25,6 +25,34 @@
       <div class="btn" id="btnUp">↑</div>
       <div class="btn" id="btnDown">↓</div>
     </div>
+    
+    <!-- Date Filter Panel -->
+    <div class="filter-panel" id="filterPanel">
+      <div class="filter-header">
+        <h3>📅 Filter by Date</h3>
+        <button class="filter-toggle" id="filterToggle">Filter</button>
+      </div>
+      <div class="filter-controls" id="filterControls">
+        <div class="filter-group">
+          <label>Year:</label>
+          <select id="yearFilter">
+            <option value="">All Years</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Month:</label>
+          <select id="monthFilter">
+            <option value="">All Months</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button class="btn-clear" id="clearFilter">Clear</button>
+        </div>
+        <div class="filter-info" id="filterInfo">
+          <span id="filterCount">Showing all 77 photos</span>
+        </div>
+      </div>
+    </div>
     </div>
   <script src="js/carousel.js"></script>
 </body>
