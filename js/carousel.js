@@ -78,7 +78,7 @@ const imageUrls = [
 
 const dates = [
   "DEC 1, 2022",
-  "14 Feb 2024",
+  "FEB 14 2024",
   "JAN 20, 2023",
   "NOV 21, 2022",
   "DEC 5, 2022",
@@ -148,7 +148,7 @@ const dates = [
   "JUL 30, 2025",
   "JUL 30, 2025",
   "JUL 30, 2025",
-  "JUL 30, 2025" // Added missing date to match the 67th image
+  "JUL 30, 2025"
 ];
 
 let currentIndex = 0;
@@ -157,6 +157,54 @@ let accumulatedDelta = 0;
 const scrollThreshold = 50;
 
 const dateParagraph = document.querySelector('.date-item p');
+
+let filteredIndices = [];
+let isFiltered = false;
+
+function parseDate(dateString) {
+  const formats = [
+    /^([A-Z]{3})\s+(\d{1,2}),\s+(\d{4})$/,
+    /^(\d{1,2})\s+([A-Z]{3})\s+(\d{4})$/,
+    /^([A-Z]{3})\s+(\d{1,2}),\s+(\d{4})$/
+  ];
+  
+  const monthMap = {
+    'JAN': 0, 'FEB': 1, 'MAR': 2, 'APR': 3, 'MAY': 4, 'JUN': 5,
+    'JUL': 6, 'AUG': 7, 'SEP': 8, 'OCT': 9, 'NOV': 10, 'DEC': 11
+  };
+  
+  for (let format of formats) {
+    const match = dateString.match(format);
+    if (match) {
+      if (format === formats[0] || format === formats[2]) {
+        const month = monthMap[match[1]];
+        const day = parseInt(match[2]);
+        const year = parseInt(match[3]);
+        return new Date(year, month, day);
+      } else if (format === formats[1]) {
+        const day = parseInt(match[1]);
+        const month = monthMap[match[2]];
+        const year = parseInt(match[3]);
+        return new Date(year, month, day);
+      }
+    }
+  }
+  
+  const fallbackDate = new Date(dateString);
+  return isNaN(fallbackDate.getTime()) ? null : fallbackDate;
+}
+
+function getDateInfo(dateString) {
+  const date = parseDate(dateString);
+  if (!date) return null;
+  
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    date: date
+  };
+}
 
 function generateCarouselItems() {
   track.innerHTML = '';
@@ -179,6 +227,11 @@ generateCarouselItems();
 const items = document.querySelectorAll('.carousel-item');
 
 function getItemHeight() {
+  for (let item of items) {
+    if (!item.classList.contains('hidden')) {
+      return item.offsetHeight;
+    }
+  }
   return items[0].offsetHeight;
 }
 
@@ -203,7 +256,6 @@ function animateDateChange(newDate) {
 }
 
 function scrollToIndex(index) {
-  // Ensure we don't go beyond the available dates
   if (index >= dates.length) {
     console.warn(`No date available for index ${index}`);
     return;
@@ -221,29 +273,241 @@ function scrollToIndex(index) {
   }, 500);
 }
 
-container.addEventListener('wheel', (e) => {
+const originalScrollToIndex = scrollToIndex;
+
+function navigateUp() {
+  console.log('navigateUp called', { scrollLock, currentIndex, isFiltered, filteredIndicesLength: filteredIndices.length });
+  if (scrollLock || currentIndex === 0) return;
+  currentIndex--;
+  
+  if (isFiltered && filteredIndices.length > 0) {
+    const actualIndex = filteredIndices[currentIndex];
+    console.log('Filtered navigation up', { currentIndex, actualIndex, itemHeight: getItemHeight() });
+    if (actualIndex !== undefined) {
+      const itemHeight = getItemHeight();
+      const offset = itemHeight * currentIndex;
+      console.log('Setting scroll position', { actualIndex, currentIndex, itemHeight, offset, transform: `translateY(-${offset}px)` });
+      track.style.transform = `translateY(-${offset}px)`;
+      animateDateChange(dates[actualIndex]);
+      
+      scrollLock = true;
+      setTimeout(() => {
+        scrollLock = false;
+        accumulatedDelta = 0;
+      }, 500);
+    }
+  } else {
+    console.log('Normal navigation up', { currentIndex });
+    originalScrollToIndex(currentIndex);
+  }
+}
+
+function navigateDown() {
+  const maxIndex = isFiltered ? filteredIndices.length - 1 : items.length - 1;
+  console.log('navigateDown called', { scrollLock, currentIndex, maxIndex, isFiltered, filteredIndicesLength: filteredIndices.length });
+  if (scrollLock || currentIndex === maxIndex) return;
+  currentIndex++;
+  
+  if (isFiltered && filteredIndices.length > 0) {
+    const actualIndex = filteredIndices[currentIndex];
+    console.log('Filtered navigation down', { currentIndex, actualIndex, itemHeight: getItemHeight(), filteredIndices: filteredIndices });
+    if (actualIndex !== undefined) {
+      const itemHeight = getItemHeight();
+      const offset = itemHeight * currentIndex;
+      console.log('Setting scroll position', { actualIndex, currentIndex, itemHeight, offset, transform: `translateY(-${offset}px)`, trackElement: track });
+      track.style.transform = `translateY(-${offset}px)`;
+      console.log('After setting transform, track.style.transform =', track.style.transform);
+      animateDateChange(dates[actualIndex]);
+      
+      scrollLock = true;
+      setTimeout(() => {
+        scrollLock = false;
+        accumulatedDelta = 0;
+      }, 500);
+    }
+  } else {
+    console.log('Normal navigation down', { currentIndex });
+    originalScrollToIndex(currentIndex);
+  }
+}
+
+function handleWheel(e) {
   e.preventDefault();
   if (scrollLock) return;
 
   accumulatedDelta += e.deltaY;
+  const maxIndex = isFiltered ? filteredIndices.length - 1 : items.length - 1;
 
-  if (accumulatedDelta > scrollThreshold && currentIndex < items.length - 1) {
+  if (accumulatedDelta > scrollThreshold && currentIndex < maxIndex) {
     currentIndex++;
-    scrollToIndex(currentIndex);
+    
+    if (isFiltered && filteredIndices.length > 0) {
+      const actualIndex = filteredIndices[currentIndex];
+      if (actualIndex !== undefined) {
+        const offset = getItemHeight() * actualIndex;
+        track.style.transform = `translateY(-${offset}px)`;
+        animateDateChange(dates[actualIndex]);
+        
+        scrollLock = true;
+        setTimeout(() => {
+          scrollLock = false;
+          accumulatedDelta = 0;
+        }, 500);
+      }
+    } else {
+      originalScrollToIndex(currentIndex);
+    }
   } else if (accumulatedDelta < -scrollThreshold && currentIndex > 0) {
     currentIndex--;
+    
+    if (isFiltered && filteredIndices.length > 0) {
+      const actualIndex = filteredIndices[currentIndex];
+      if (actualIndex !== undefined) {
+        const offset = getItemHeight() * actualIndex;
+        track.style.transform = `translateY(-${offset}px)`;
+        animateDateChange(dates[actualIndex]);
+        
+        scrollLock = true;
+        setTimeout(() => {
+          scrollLock = false;
+          accumulatedDelta = 0;
+        }, 500);
+      }
+    } else {
+      originalScrollToIndex(currentIndex);
+    }
+  }
+}
+
+container.addEventListener('wheel', handleWheel, { passive: false });
+document.getElementById('btnUp').addEventListener('click', navigateUp);
+document.getElementById('btnDown').addEventListener('click', navigateDown);
+
+function populateFilters() {
+  const yearFilter = document.getElementById('yearFilter');
+  const monthFilter = document.getElementById('monthFilter');
+  const years = new Set();
+  const months = new Set();
+  
+  dates.forEach(dateString => {
+    const dateInfo = getDateInfo(dateString);
+    if (dateInfo) {
+      years.add(dateInfo.year);
+      months.add(dateInfo.month);
+    }
+  });
+  
+  yearFilter.innerHTML = '<option value="">All Years</option>';
+  Array.from(years).sort((a, b) => b - a).forEach(year => {
+    const option = document.createElement('option');
+    option.value = year;
+    option.textContent = year;
+    yearFilter.appendChild(option);
+  });
+  
+  monthFilter.innerHTML = '<option value="">All Months</option>';
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  
+  Array.from(months).sort((a, b) => a - b).forEach(month => {
+    const option = document.createElement('option');
+    option.value = month;
+    option.textContent = monthNames[month - 1];
+    monthFilter.appendChild(option);
+  });
+}
+
+function applyFilter() {
+  const yearFilter = document.getElementById('yearFilter');
+  const monthFilter = document.getElementById('monthFilter');
+  const filterCount = document.getElementById('filterCount');
+  
+  const selectedYear = yearFilter.value;
+  const selectedMonth = monthFilter.value;
+  
+  console.log('applyFilter called', { selectedYear, selectedMonth });
+  
+  items.forEach(item => {
+    item.classList.remove('hidden');
+  });
+  
+  filteredIndices = [];
+  
+  if (selectedYear || selectedMonth) {
+    items.forEach((item, index) => {
+      const dateString = dates[index];
+      const dateInfo = getDateInfo(dateString);
+      
+      if (dateInfo) {
+        const matchesYear = !selectedYear || dateInfo.year == selectedYear;
+        const matchesMonth = !selectedMonth || dateInfo.month == selectedMonth;
+        
+        if (!(matchesYear && matchesMonth)) {
+          item.classList.add('hidden');
+        } else {
+          filteredIndices.push(index);
+        }
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+    
+    isFiltered = true;
+    filterCount.textContent = `Showing ${filteredIndices.length} of ${items.length} photos`;
+    
+    console.log('Filter applied', { isFiltered, filteredIndices, filteredIndicesLength: filteredIndices.length, currentIndex: 0 });
+    
+    if (filteredIndices.length > 0) {
+      currentIndex = 0;
+      scrollToIndex(filteredIndices[currentIndex]);
+    }
+  } else {
+    isFiltered = false;
+    filterCount.textContent = `Showing all ${items.length} photos`;
+    
+    console.log('Filter cleared', { isFiltered });
+    
+    currentIndex = 0;
     scrollToIndex(currentIndex);
   }
-}, { passive: false });
+}
 
-document.getElementById('btnUp').addEventListener('click', () => {
-  if (scrollLock || currentIndex === 0) return;
-  currentIndex--;
+function clearFilter() {
+  const yearFilter = document.getElementById('yearFilter');
+  const monthFilter = document.getElementById('monthFilter');
+  const filterCount = document.getElementById('filterCount');
+  
+  yearFilter.value = '';
+  monthFilter.value = '';
+  
+  items.forEach(item => {
+    item.classList.remove('hidden');
+  });
+  
+  isFiltered = false;
+  filteredIndices = [];
+  filterCount.textContent = `Showing all ${items.length} photos`;
+  
+  currentIndex = 0;
   scrollToIndex(currentIndex);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  populateFilters();
+  
+  const filterToggle = document.getElementById('filterToggle');
+  const filterControls = document.getElementById('filterControls');
+  
+  filterToggle.addEventListener('click', () => {
+    filterControls.classList.toggle('active');
+    filterToggle.textContent = filterControls.classList.contains('active') ? 'Hide' : 'Filter';
+  });
+  
+  document.getElementById('clearFilter').addEventListener('click', clearFilter);
+  
+  document.getElementById('yearFilter').addEventListener('change', applyFilter);
+  document.getElementById('monthFilter').addEventListener('change', applyFilter);
 });
 
-document.getElementById('btnDown').addEventListener('click', () => {
-  if (scrollLock || currentIndex === items.length - 1) return;
-  currentIndex++;
-  scrollToIndex(currentIndex);
-});

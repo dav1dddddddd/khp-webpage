@@ -1,171 +1,343 @@
+/* ========================================
+   MUSEUM PAGE STYLES
+   ======================================== */
+
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 @font-face {
     font-family: HandwritingFont;
     src: url(Dhlhandwritingfont-Regular.ttf);
 }
 
+/* ========================================
+   RESET & BASE STYLES
+   ======================================== */
 
 * {
     padding: 0;
+    margin: 0;
     font-family: HandwritingFont;
     box-sizing: border-box;
 }
 
 body {
-      margin: 0;
-      height: 100vh;
-      background: #d1ffd4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      font-family: 'Press Start 2P', monospace;
-    }
+    margin: 0;
+    height: 100vh;
+    background: #d1ffd4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Press Start 2P', monospace;
+}
 
-    .background-container {
-        position: absolute;
-        display: flex;
-        height: 100%;
-        width: 100%;
-        background-size: cover;
-        background-position: right center;
-        background-image: url(../assets/images/spotlight.jpg);
-        z-index: 0;
-    }
+/* ========================================
+   BACKGROUND & LAYOUT
+   ======================================== */
 
-    /* 8-bit font (optional) */
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+.background-container {
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: right center;
+    background-image: url(../assets/images/spotlight.jpg);
+    z-index: 0;
+}
 
-    .carousel-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 120px;
-    }
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 120px;
+}
 
-    .date-panel {
-  width: 170px;          /* narrow box width */
-  height: 80px;         /* same height as one carousel item */
-  border: 4px solid #fff;
-  background-color: #222;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  font-family: 'Press Start 2P', monospace;
-  color: #eee;
-  font-size: 1rem;
-  text-transform: uppercase;
-  box-sizing: border-box;
-  z-index: 1;
+/* ========================================
+   DATE PANEL
+   ======================================== */
+
+.date-panel {
+    width: 170px;
+    height: 80px;
+    border: 4px solid #fff;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    font-family: 'Press Start 2P', monospace;
+    color: #eee;
+    font-size: 1rem;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    z-index: 1;
 }
 
 .date-item {
-  width: 100%;
-  height: 100%;
-  background: #111;
-  overflow: hidden;
-  position: relative;  /* <-- added */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
 
 .date-item p {
-  margin: 0;
-  position: absolute;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  will-change: transform, opacity;
-  color: #fff;
-  font-family: 'HandwritingFont', monospace;
-  font-size: 30px;
-  text-align: center;
-  user-select: none;
-  white-space: nowrap;
+    margin: 0;
+    position: absolute;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    will-change: transform, opacity;
+    color: #fff;
+    font-family: 'HandwritingFont', monospace;
+    font-size: 30px;
+    text-align: center;
+    user-select: none;
+    white-space: nowrap;
 }
 
+/* ========================================
+   CAROUSEL CONTAINER
+   ======================================== */
 
-    .carousel-container {
-      width: 500px;
-      height: 520px;
-      right: 127px;
-      position: relative;
-      overflow: hidden;
-      background-color: #000;
-    }
-
-    #frame {
-        position: absolute;
-        left: 495px;
-        max-width: 540px;
-        z-index: 3;
-    }
-
-    #sign {
-      position: absolute;
-      width: 160px;
-      top: 10px;
-      left: 50px;
-      transition: transform 0.3s ease;
-    }
-
-    #sign:hover {
-      transform: scale(1.15);
-    }
-
-    .carousel-track {
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .carousel-item {
-      height: 520px;
-      background: #333;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1rem;
-      text-transform: uppercase;
-      border-bottom: 4px solid #000;
-      overflow: hidden;
-    }
-
-    .carousel-item img {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-        display: block;
+.carousel-container {
+    width: 500px;
+    height: 520px;
+    right: 127px;
+    position: relative;
+    overflow: hidden;
+    background-color: #000;
 }
+
+.carousel-track {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    height: 520px;
+    background: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-bottom: 4px solid #000;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.carousel-item.hidden {
+    display: none;
+}
+
+/* ========================================
+   CAROUSEL BUTTONS
+   ======================================== */
 
 .carousel-buttons {
-      display: flex;
-      position: relative;
-      right: 130px;
-      flex-direction: column;
-      gap: 16px;
-      z-index: 1;
-    }
+    display: flex;
+    position: relative;
+    right: 130px;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1;
+}
 
-    .btn {
-      background: #000;
-      border: 4px solid #fff;
-      color: #fff;
-      padding: 8px;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 30px;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.1s ease;
-    }
+.btn {
+    background: #000;
+    border: 4px solid #fff;
+    color: #fff;
+    padding: 8px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s ease;
+}
 
-    .btn:hover {
-      background: #111;
-      transform: scale(1.05);
-    }
+.btn:hover {
+    background: #111;
+    transform: scale(1.05);
+}
 
-    .btn:active {
-      transform: scale(0.95);
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* ========================================
+   FILTER PANEL
+   ======================================== */
+
+.filter-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 3px solid #fff;
+    border-radius: 8px;
+    padding: 15px;
+    min-width: 250px;
+    z-index: 10;
+    font-family: 'Press Start 2P', monospace;
+    color: #fff;
+    font-size: 8px;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 8px;
+}
+
+.filter-header h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #fff;
+}
+
+.filter-toggle {
+    background: #333;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 4px 8px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-toggle:hover {
+    background: #555;
+    transform: scale(1.05);
+}
+
+.filter-controls {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-controls.active {
+    display: flex;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filter-group label {
+    font-size: 6px;
+    color: #ccc;
+    text-transform: uppercase;
+}
+
+.filter-group select {
+    background: #222;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 4px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    border-radius: 4px;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: #ff6b6b;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.btn-filter, .btn-clear {
+    background: #333;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 6px 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.btn-filter:hover {
+    background: #4CAF50;
+    transform: scale(1.05);
+}
+
+.btn-clear:hover {
+    background: #f44336;
+    transform: scale(1.05);
+}
+
+.filter-info {
+    margin-top: 8px;
+    padding: 6px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.filter-info span {
+    font-size: 6px;
+    color: #ccc;
+}
+
+/* ========================================
+   DECORATIVE ELEMENTS
+   ======================================== */
+
+#frame {
+    position: absolute;
+    left: 495px;
+    max-width: 540px;
+    z-index: 3;
+}
+
+#sign {
+    position: absolute;
+    width: 160px;
+    top: 10px;
+    left: 50px;
+    transition: transform 0.3s ease;
+}
+
+#sign:hover {
+    transform: scale(1.15);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 1200px) {
+    .filter-panel {
+        top: 10px;
+        right: 10px;
+        min-width: 200px;
+        padding: 10px;
     }
+}
