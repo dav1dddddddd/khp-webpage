@@ -161,6 +161,7 @@ body {
     border: 4px solid #fff;
     color: #fff;
     padding: 8px;
+    padding-left: 12px;
     font-family: 'Press Start 2P', monospace;
     font-size: 30px;
     cursor: pointer;
@@ -191,7 +192,6 @@ body {
     padding: 15px;
     min-width: 250px;
     z-index: 10;
-    font-family: 'Press Start 2P', monospace;
     color: #fff;
     font-size: 8px;
 }
@@ -206,8 +206,8 @@ body {
 }
 
 .filter-header h3 {
-    margin: 0;
-    font-size: 20px;
+    font-size: 24px;
+    padding-right: 20px;
     color: #fff;
 }
 
@@ -216,8 +216,7 @@ body {
     border: 2px solid #fff;
     color: #fff;
     padding: 4px 8px;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 6px;
+    font-size: 16px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -244,7 +243,7 @@ body {
 }
 
 .filter-group label {
-    font-size: 6px;
+    font-size: 16px;
     color: #ccc;
     text-transform: uppercase;
 }
@@ -254,8 +253,7 @@ body {
     border: 2px solid #fff;
     color: #fff;
     padding: 4px;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 6px;
+    font-size: 24px;
     border-radius: 4px;
 }
 
@@ -275,8 +273,7 @@ body {
     border: 2px solid #fff;
     color: #fff;
     padding: 6px 12px;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 6px;
+    font-size: 24px;
     cursor: pointer;
     transition: all 0.2s ease;
     flex: 1;
@@ -302,7 +299,7 @@ body {
 }
 
 .filter-info span {
-    font-size: 6px;
+    font-size: 20px;
     color: #ccc;
 }
 
