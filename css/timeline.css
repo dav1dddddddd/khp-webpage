@@ -1,0 +1,531 @@
+@font-face {
+    font-family: HandwritingFont;
+    src: url(Dhlhandwritingfont-Regular.ttf);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: HandwritingFont;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    color: rgb(156, 149, 255);
+    background: linear-gradient(135deg, #d1ffd4 0%, #f6e3ff 50%, #e8d5ff 100%);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Navigation */
+.bar-container {
+    position: absolute;
+    background-color: #E8FFEA;
+    width: 50rem;
+    height: 6rem;
+    top: 1rem;
+    left: 22.5rem;
+    opacity: 100%;   
+    border-radius: 50px;
+    animation: navbar 0.5s ease;
+    z-index: 1;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    animation: movingvert 0.5s ease;
+}
+
+nav ul {
+    margin: auto;
+}
+
+nav ul li {
+    position: relative;
+    list-style: none;
+    margin: 2rem;
+    margin-top: 2.25rem;
+    display: inline-block;
+    z-index: 6;
+}
+
+nav ul li a {
+    position: relative;
+    top: 0.5rem;
+    color: rgb(139, 131, 255);
+    font-size: 3rem;
+    text-decoration: none;
+    font-weight: 550;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: rgb(188, 184, 255);
+}
+
+/* Timeline Header */
+.timeline-header {
+    text-align: center;
+    padding: 16rem 2rem 4rem;
+    margin-bottom: 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    transition: all 0.8s ease;
+}
+
+.timeline-header.scrolled {
+    opacity: 0;
+    transform: translateY(-100px);
+    pointer-events: none;
+}
+
+.timeline-header h1 {
+    font-size: 4.5rem;
+    color: rgb(139, 131, 255);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease;
+}
+
+.timeline-header p {
+    font-size: 2rem;
+    color: rgb(156, 149, 255);
+    animation: fadeInUp 1s ease 0.3s both;
+}
+
+/* Timeline Container */
+.timeline-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12rem 2rem 4rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+    margin-top: 8rem;
+}
+
+.timeline-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, 
+        rgba(139, 131, 255, 0.3) 0%,
+        rgba(139, 131, 255, 0.8) 50%,
+        rgba(139, 131, 255, 0.3) 100%);
+    transform: translateX(-50%);
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(139, 131, 255, 0.3);
+    height: 0;
+    transition: height 1.2s ease;
+}
+
+.timeline-line.growing {
+    height: 100%;
+}
+
+/* Timeline Items */
+.timeline-item {
+    position: relative;
+    margin: 4rem 0;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 50%;
+    top: 1.25rem;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #ff9a9e, #fecfef);
+    border: 4px solid white;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    box-shadow: 0 0 20px rgba(255, 154, 158, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.timeline-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 1rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    flex-direction: row;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    flex-direction: row-reverse;
+}
+
+/* Notecards */
+.notecard {
+    flex: 1;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(139, 131, 255, 0.2);
+    position: relative;
+    transform: rotate(-1deg);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(even) .notecard {
+    transform: rotate(1deg);
+}
+
+.notecard:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.notecard::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, #ff9a9e, #fecfef, #a8edea, #fed6e3);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.notecard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(139, 131, 255, 0.2);
+}
+
+.notecard-header h3 {
+    font-size: 1.8rem;
+    color: rgb(139, 131, 255);
+    font-weight: 600;
+}
+
+.notecard-header .date {
+    font-size: 1.25rem;
+    color: rgb(156, 149, 255);
+    background: rgba(139, 131, 255, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+}
+
+.notecard-body p {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #555;
+    text-align: justify;
+}
+
+/* Photo Frames */
+.photo-frame {
+    flex: 0 0 300px;
+    height: 250px;
+    background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+    border: 8px solid #d1c4e9;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: rotate(2deg);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(even) .photo-frame {
+    transform: rotate(-2deg);
+}
+
+.photo-frame:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+.photo-frame::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, #ff9a9e, #fecfef);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.2;
+}
+
+.frame-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.8), rgba(248, 249, 255, 0.8));
+    border-radius: 8px;
+}
+
+.placeholder-text {
+    font-size: 1.2rem;
+    color: rgb(139, 131, 255);
+    text-align: center;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+/* Floating Elements */
+.floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+#stars {
+    position: absolute;
+    top: 2rem;
+    left: 24.5rem;
+    width: 5%;
+    transform: rotate(10deg);
+    animation: movingvert 0.5s ease;
+    z-index: 6;
+}
+
+#stars2 {
+    position: absolute;
+    top: 2rem;
+    right: 24.5rem;
+    width: 5%;
+    transform: rotate(10deg);
+    animation: movingvert 0.5s ease;
+    z-index: 6;
+}
+
+/* Animations */
+@keyframes movingvert {
+    from {
+        transform: translateY(4.5rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+}
+
+@keyframes navbar {
+    from {
+        transform: translateY(4.5rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0rem);
+        opacity: 0.5;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 20px rgba(255, 154, 158, 0.5);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.1);
+        box-shadow: 0 0 30px rgba(255, 154, 158, 0.8);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Photo Modal/Lightbox */
+.photo-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.photo-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.photo-modal-content {
+    max-width: 30%;
+    max-height: 50%;
+    position: relative;
+    bottom: 8rem;
+    animation: scaleIn 0.3s ease;
+}
+
+.photo-modal img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.photo-modal-close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.photo-modal-close:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .timeline-line {
+        left: 2rem;
+    }
+    
+    .timeline-marker {
+        left: 2rem;
+    }
+    
+    .timeline-content {
+        flex-direction: column !important;
+        margin-left: 3rem;
+        gap: 1.5rem;
+    }
+    
+    .notecard {
+        transform: none !important;
+    }
+    
+    .photo-frame {
+        transform: none !important;
+        flex: none;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .timeline-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    nav ul li {
+        margin: 1rem;
+        margin-top: 1.25rem;
+    }
+    
+    nav ul li a {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline-container {
+        padding: 0 1rem 2rem;
+    }
+    
+    .timeline-content {
+        margin-left: 2rem;
+    }
+    
+    .notecard {
+        padding: 1.5rem;
+    }
+    
+    .notecard-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .notecard-body p {
+        font-size: 1rem;
+    }
+}
+
+
